@@ -1,0 +1,39 @@
+@import 'home.scss';
+@import 'test.scss';
+*{
+    box-sizing: border-box;
+}
+html{
+    font-size: 16px;
+}
+body{
+    margin: 0%;
+}
+a{
+    text-decoration: none;
+    color: black;
+    &:hover{
+        cursor: pointer;
+    }
+}
+button{
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+}
+.zoom{
+    transition: all 1s;
+    &:hover{
+        scale: 1.1;
+    }
+}
+ul{
+    padding: 0px;
+    li{
+    list-style: none;
+    margin: 0%;
+    }
+}
+h1{
+    margin: 0px;
+}
