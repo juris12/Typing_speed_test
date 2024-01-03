@@ -1,35 +1,65 @@
 .test_outer{
-    height: 100vh;
-    margin: auto;
-    background-color: aquamarine;
+    height: 90vh;
+    margin: 5vh auto;
+    background-color: #fff;
     display: flex;
     flex-direction: column;
+    position: relative;
+    border-radius: 15px;
     overflow: hidden;
     max-width: 1000px;
-    &::before {
-        content: "";
+    padding: 0 30px;
+    
+    .shadow {
+        max-width: 1000px;
+        width: 100%;
+        height: 30vh;
+        background-color: transparent;
+        z-index: 1111;
         position: absolute;
-        top: 10%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 0;
-        height: 0;
-        border-left: 10px solid transparent;
-        border-right: 10px solid transparent;
-        border-bottom: 20px solid #3498db;
+        &:before,
+        &:after {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 35%;
+        }
+        &:before {
+            left: -30px; 
+            box-shadow: 300px 0px 100px -100px rgb(255, 255, 255) inset;
+        }
+        &:after {
+            right: 0px;
+            box-shadow: 300px 0px 100px -100px rgb(255, 255, 255) inset;
+            transform: scaleX(-1);
+        }
     }
     #test_typing{
         position: relative;
         display: flex;
-        margin-left: 50%;
-        margin-bottom: 50px;
+        margin: 17vh 0px 2vh 50%;
         span{
             margin: 0%;
             font-weight: bold;
             font-size: 5rem;
         }
         #test_span_curent{
-            background-color: blue;
+            background-color: rgb(2, 128, 2,0.1);
+            border-radius: 3px;
+            position: relative;
+            &::before {
+                content: "";
+                position: absolute;
+                bottom: -20px;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 0;
+                height: 0;
+                border-left: 10px solid transparent;
+                border-right: 10px solid transparent;
+                border-bottom: 20px solid #08942d;
+            }
         }
         .test_span_old{
             opacity: 0.5;
@@ -41,14 +71,16 @@
     }
 }
 .test_statistic{
-    background-color: red;
     width: 100%;
-    h3{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 7vh;
+    h2{
         width: 100%;
-        padding: 10px;
-        margin-bottom: 0%;
-        color: green;
-        border: 3px solid green;
+        padding: 20px;
+        margin-bottom: 5%;
+        border: 3px solid rgb(0, 0, 0);
         border-width: 0px 0px 3px 0px;
     }
     ul{
@@ -59,6 +91,7 @@
             padding: 10px;
             display: flex;
             flex-direction: column;
+            align-items: center;
             h4{
                 margin-top: 0px;
             }

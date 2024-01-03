@@ -1,10 +1,15 @@
 @import 'home.scss';
 @import 'test.scss';
+@import 'profil.scss';
+@import 'profilPage.scss';
+
 *{
     box-sizing: border-box;
+    font-family: 'Source Sans Pro', sans-serif;
 }
 html{
     font-size: 16px;
+    background-color: #eeeeee;
 }
 body{
     margin: 0%;
@@ -19,12 +24,13 @@ a{
 button{
     border: none;
     cursor: pointer;
+    font-size: 1rem;
     background-color: transparent;
 }
 .zoom{
-    transition: all 1s;
+    transition: all 0.5s;
     &:hover{
-        scale: 1.1;
+        scale: 1.05;
     }
 }
 ul{

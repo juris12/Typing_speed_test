@@ -33,31 +33,45 @@
 }
 
 .test_outer {
-  height: 100vh;
-  margin: auto;
-  background-color: aquamarine;
+  height: 90vh;
+  margin: 5vh auto;
+  background-color: #fff;
   display: flex;
   flex-direction: column;
+  position: relative;
+  border-radius: 15px;
   overflow: hidden;
   max-width: 1000px;
+  padding: 0 30px;
 }
-.test_outer::before {
+.test_outer .shadow {
+  max-width: 1000px;
+  width: 100%;
+  height: 30vh;
+  background-color: transparent;
+  z-index: 1111;
+  position: absolute;
+}
+.test_outer .shadow:before, .test_outer .shadow:after {
   content: "";
   position: absolute;
-  top: 10%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 0;
-  height: 0;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  border-bottom: 20px solid #3498db;
+  top: 0;
+  bottom: 0;
+  width: 35%;
+}
+.test_outer .shadow:before {
+  left: -30px;
+  box-shadow: 300px 0px 100px -100px rgb(255, 255, 255) inset;
+}
+.test_outer .shadow:after {
+  right: 0px;
+  box-shadow: 300px 0px 100px -100px rgb(255, 255, 255) inset;
+  transform: scaleX(-1);
 }
 .test_outer #test_typing {
   position: relative;
   display: flex;
-  margin-left: 50%;
-  margin-bottom: 50px;
+  margin: 17vh 0px 2vh 50%;
 }
 .test_outer #test_typing span {
   margin: 0%;
@@ -65,7 +79,21 @@
   font-size: 5rem;
 }
 .test_outer #test_typing #test_span_curent {
-  background-color: blue;
+  background-color: rgba(2, 128, 2, 0.1);
+  border-radius: 3px;
+  position: relative;
+}
+.test_outer #test_typing #test_span_curent::before {
+  content: "";
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 20px solid #08942d;
 }
 .test_outer #test_typing .test_span_old {
   opacity: 0.5;
@@ -76,15 +104,17 @@
 }
 
 .test_statistic {
-  background-color: red;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 7vh;
 }
-.test_statistic h3 {
+.test_statistic h2 {
   width: 100%;
-  padding: 10px;
-  margin-bottom: 0%;
-  color: green;
-  border: 3px solid green;
+  padding: 20px;
+  margin-bottom: 5%;
+  border: 3px solid rgb(0, 0, 0);
   border-width: 0px 0px 3px 0px;
 }
 .test_statistic ul {
@@ -96,6 +126,7 @@
   padding: 10px;
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 .test_statistic ul li h4 {
   margin-top: 0px;
@@ -116,12 +147,171 @@
   display: inline-block;
 }
 
+.profil_outer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 70%;
+  margin: auto;
+}
+
+#profil_iner_right, #profil_iner_left {
+  width: 30%;
+  height: 70vh;
+  margin: 20vh auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  max-width: 400px;
+}
+#profil_iner_right h1, #profil_iner_left h1 {
+  font-size: 3rem;
+}
+#profil_iner_right p, #profil_iner_left p {
+  margin-bottom: 0px;
+}
+
+#profil_iner_right {
+  display: none;
+}
+#profil_iner_right form label {
+  visibility: hidden;
+}
+#profil_iner_right form input {
+  border: 3px rgb(1, 125, 1) solid;
+  width: 100%;
+  margin: 20px 0px;
+  padding: 15px;
+  font-size: 1rem;
+  border-radius: 20px;
+  background-color: rgb(244, 244, 244);
+}
+
+#profil_iner_left ul {
+  margin: 20px;
+  width: 100%;
+  max-height: 50vh;
+  overflow: auto;
+}
+#profil_iner_left ul li button {
+  border: 3px rgb(1, 125, 1) solid;
+  width: 100%;
+  margin: 10px 0px;
+  padding: 15px;
+  border-radius: 20px;
+  background-color: rgb(244, 244, 244);
+  font-weight: bold;
+  text-align: left;
+  transition: all 0.5s;
+}
+#profil_iner_left ul li button:hover {
+  padding-left: 10%;
+  background-color: rgb(210, 248, 210);
+}
+
+.add_profil_button {
+  background-color: rgb(1, 125, 1);
+  border-radius: 20px;
+  width: 100%;
+  padding: 15px;
+  border-radius: 20px;
+  color: white;
+  font-weight: bold;
+}
+
+.profil_page_outer {
+  display: grid;
+  grid-template-areas: "info stats" "last_tests stats";
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: calc(40vh - 20px) 50vh;
+  gap: 20px 20px;
+  width: 70%;
+  margin: 5vh auto;
+  border-radius: 10px;
+}
+
+#profil_page_main_info,
+#profil_page_last_tests,
+#profil_page_stats {
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+#profil_page_main_info {
+  position: relative;
+  grid-area: info;
+}
+#profil_page_main_info div {
+  position: absolute;
+  bottom: 20px;
+  display: flex;
+  width: 100%;
+}
+
+#profil_page_last_tests {
+  grid-area: last_tests;
+}
+#profil_page_last_tests div {
+  display: flex;
+  align-items: center;
+}
+#profil_page_last_tests div h3 {
+  margin: 0;
+}
+#profil_page_last_tests div #select_stats {
+  margin-left: 20px;
+  font-size: 14px;
+  color: #333;
+  height: 2rem;
+  background-color: #fff;
+  border: 1px solid #2f2f2f;
+  border-width: 0px 0px 2px 0px;
+}
+#profil_page_last_tests div #select_stats option {
+  background-color: #fff;
+  color: #333;
+  padding: 8px;
+}
+
+#profil_page_stats {
+  grid-area: stats;
+  overflow: auto;
+}
+#profil_page_stats h2 {
+  margin-top: 0;
+}
+#profil_page_stats table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+}
+#profil_page_stats th, #profil_page_stats td {
+  text-align: left;
+  padding: 10px;
+}
+#profil_page_stats tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+#new_test_btn, #log_out_btn {
+  background-color: green;
+  border-radius: 20px;
+  color: #fff;
+  padding: 10px 25px;
+  font-weight: bold;
+  margin-right: 10%;
+}
+
 * {
   box-sizing: border-box;
+  font-family: "Source Sans Pro", sans-serif;
 }
 
 html {
   font-size: 16px;
+  background-color: #eeeeee;
 }
 
 body {
@@ -139,14 +329,15 @@ a:hover {
 button {
   border: none;
   cursor: pointer;
+  font-size: 1rem;
   background-color: transparent;
 }
 
 .zoom {
-  transition: all 1s;
+  transition: all 0.5s;
 }
 .zoom:hover {
-  scale: 1.1;
+  scale: 1.05;
 }
 
 ul {

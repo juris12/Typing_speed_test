@@ -1,0 +1,77 @@
+@import "colors";
+.profil_outer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    margin: auto;
+}
+
+#profil_iner_right, #profil_iner_left{
+    width: 30%;
+    height: 70vh;
+    margin: 20vh auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    max-width: 400px;
+    h1{
+        font-size: 3rem;
+    }
+    p{
+     margin-bottom: 0px;   
+    }
+}
+
+#profil_iner_right{
+    display: none;
+    form{
+        label{
+            visibility: hidden;
+        }
+        input{
+            border: 3px $primary_color solid;
+            width: 100%;
+            margin: 20px 0px;
+            padding: 15px;
+            font-size: 1rem;
+            border-radius: 20px;
+            background-color: $backbround_color;
+        }
+    }
+}
+
+#profil_iner_left{
+    ul {
+        margin: 20px;
+        width: 100%;
+        max-height: 50vh;
+        overflow: auto;
+        li button{
+            border: 3px $primary_color solid;
+            width: 100%;
+            margin: 10px 0px;
+            padding: 15px;
+            border-radius: 20px;
+            background-color: $backbround_color;
+            font-weight: bold;
+            text-align: left;
+            transition: all 0.5s;
+            &:hover{
+                padding-left: 10%;
+                background-color: $secondary_color;
+            }
+        }
+    }
+
+}
+.add_profil_button{
+    background-color: $primary_color;
+    border-radius: 20px;
+    width: 100%;
+    padding: 15px;
+    border-radius: 20px;
+    color: white;
+    font-weight: bold;
+}
