@@ -2,96 +2,109 @@ import Game from './game.js'
 import StoredProfiles from './helper.js'
 
 const storedProfileInfo = new StoredProfiles('profilData')
-
-const texttttt = 'Lorem ipsum lremu cumledum lorem ipsuahst jajsf afgj ajjawksfkk ao asfa'.split('')
-
-
-const add_text = (text,testTyping) => {
-    text.forEach(leater => {
-        const spanElement = document.createElement('span');
-        spanElement.className = 'test_span';
-        spanElement.textContent = leater;
-        spanElement.id = '';
-        if(leater === ' '){spanElement.classList.add('test_span_whitespace')};
+const testTyping = document.getElementById('test_typing');
+const curentWord = document.getElementById('curent_word');
+let testSpans = document.querySelectorAll('.test_span');
+const texttttt = 'Lorem ipsum lremu cumledum lorem ipLorem ipsum lremu cumledum lorem ipsuahst jajsf afgj ajjawksfkk ao asfa Lorem ipsum lremu cumledum lorem ipsuahst jajsf afgj ajjawksfkk ao asfa Lorem ipsum lremu cumledum lorem ipsuahst jajsf afgj ajjawksfkk ao asfa Lorem ipsum lremu cumledum lorem ipsuahst jajsf afgj ajjawksfkk ao asfa Lorem ipsum lremu cumledum lorem ipsuahst jajsf afgj ajjawksfkk ao asfa Lorem ipsum lremu cumledum lorem ipsuahst jajsf afgj ajjawksfkk ao asfa suahst jajsf afgj ajjawksfkk ao asfa'
+const statsElements = {
+    countdownSpan: document.getElementById("countdown"),
+    speedSpan: document.getElementById("speed"),
+}
+const game = new Game(500,statsElements,storedProfileInfo); // Initialize with 60 seconds
+async function getRandomText() {
+    try {
+      const response = await fetch('https://baconipsum.com/api/?type=meat-and-filler');
+      const data = await response.json();
+      return data[0];
+    } catch (error) {
+      console.error('Error fetching random text:', error);
+      return ''
+    }
+  }
+const add_text = async (testTyping) => {
+    let text = ''
+    getRandomText().then(random => {
+        random.split(' ').forEach(word => {
+            const spanElement = document.createElement('span');
+            spanElement.className = 'test_span';
+            spanElement.textContent = word;
+            spanElement.id = '';
+            
+            testTyping.appendChild(spanElement);
+        });
+        game.text = [...game.text,...text.split(' ')]
         
-        testTyping.appendChild(spanElement);
-    });
+    })
 }
 
 
+document.addEventListener("DOMContentLoaded", async function() {
 
-
-
-
-document.addEventListener("DOMContentLoaded", function() {
-
-    const statsElements = {
-        countdownSpan: document.getElementById("countdown"),
-        speedSpan: document.getElementById("speed"),
-        errorsSpan: document.getElementById("errors"),
-        errorRateSpan: document.getElementById("errorRate"),
-        lastKeySpan: document.getElementById("lastKey"),
-        signsSpan: document.getElementById("signs")
-    }
-
-
-    const testTyping = document.getElementById('test_typing');
-    add_text(texttttt,testTyping);
     let currentIndex = 0;
-    let currentAllLetterIndex = 0;
-    let testSpans = document.querySelectorAll('.test_span');
-
-    const game = new Game(5,statsElements,storedProfileInfo); // Initialize with 60 seconds
-   
-
-
-
-    const set_curent_span = (i) => {
+    const set_curent_span = async (i) => {
+        await add_text(testTyping);
         testSpans.forEach(leater => {
             leater.id = ''
         })
+        
         testSpans[i].id = 'test_span_curent';
     }
-    set_curent_span(currentAllLetterIndex)
-    testTyping.style.right = `${(testSpans[0].offsetWidth/2) +parseInt(testTyping.style.right)}px`
+    set_curent_span(currentIndex)
+
+
 
     function handleKeyPress(event) {
         game.startTimer(); // Start the timer
+        curentWord.innerHTML = ''
+        let curentWordIndex = 0
+        let row = 0
+        let rowWidth = 0
         document.addEventListener("keyup", function(event) {
-            game.updateErrorRateStats(currentAllLetterIndex)
-            if (/^[a-zA-Z0-9 ]$/.test(event.key)) {
+            if (/^[a-zA-Z0-9]$/.test(event.key)) {
                 const isShiftPressed = event.shiftKey;
                 const pressedKey = isShiftPressed ? event.key.toUpperCase() : event.key;
-                const curentElementh = testSpans[currentAllLetterIndex]
-                
-                if (pressedKey === texttttt[currentIndex]) {
-                    game.signs += 1
-                    game.lastkey = pressedKey
-                    if(texttttt[currentIndex + 1] === ' '){
-                        game.words += 1
-                    }
-                    set_curent_span(currentAllLetterIndex+1)
-                    let newRightValue=(parseFloat(getComputedStyle(testSpans[currentAllLetterIndex+1]).width)/2)+parseFloat(getComputedStyle(curentElementh).width)/2
-                    testTyping.style.right = `${newRightValue +parseFloat(testTyping.style.right)}px`
-                    curentElementh.classList.add('test_span_old')
-
-                    currentIndex++
-                    currentAllLetterIndex++
-                    testSpans = document.querySelectorAll('.test_span')
-
-
+                game.currentWord += pressedKey
+                if (pressedKey === game.text[currentIndex][curentWordIndex]) {
+                    curentWord.innerHTML += `<span class="test_span_old">${pressedKey}</span>`
                 } else {
-                    game.error += 1;
-                    const wrongLeter = document.createElement('span');
-                    wrongLeter.style.color = 'red'
-                    wrongLeter.className = 'test_span';
-                    wrongLeter.textContent = pressedKey === ' ' ? '_' : pressedKey;
-
-                    testTyping.insertBefore(wrongLeter, curentElementh);
-                    testTyping.style.right = `${parseFloat(getComputedStyle(wrongLeter).width) + parseFloat(testTyping.style.right)}px`
-                    currentAllLetterIndex++;
-                    testSpans = document.querySelectorAll('.test_span');
+                    curentWord.innerHTML += `<span class="test_span_error">${pressedKey}</span>`
                 }
+                curentWordIndex++
+            } else if (event.key === ' ') {
+                rowWidth += testSpans[row].offsetWidth
+                console.log(row + ' ' + testSpans[row].offsetWidth+ ' ' +  rowWidth + ' ' + testSpans.length)
+                if (rowWidth >= testTyping.offsetWidth-50) {
+                    currentIndex -= row
+                    rowWidth = 0 
+                    for (let i = 0; i < row; i++) {
+                        if (testTyping.firstChild) {
+                            testTyping.removeChild(testTyping.firstChild);
+                        }
+                    }
+                    row = 0
+                    testSpans = document.querySelectorAll('.test_span')
+                }
+                if (game.currentWord == game.text[currentIndex]) {
+                    game.words++
+                    testSpans[currentIndex].className += ' test_span_old'    
+                } else {
+                    testSpans[currentIndex].className += ' test_span_error' 
+                }
+                game.allWords++
+                game.currentWord = ''
+                currentIndex++
+                row++
+                set_curent_span(currentIndex)
+                curentWord.innerText = ''
+                curentWordIndex = 0
+            } else if (event.key === 'Backspace') {
+                  game.currentWord = game.currentWord.slice(0,-1)
+                curentWord.removeChild(curentWord.lastChild)
+                curentWordIndex = curentWordIndex === 0 ? 0 : curentWordIndex - 1
+            } else if (event.key === 'Enter') {
+
+            } else if (event.key === 'Escape') {
+
             }
         });
         document.removeEventListener('keypress', handleKeyPress);
