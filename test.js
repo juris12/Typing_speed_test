@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function() {
     let currentAllLetterIndex = 0;
     let testSpans = document.querySelectorAll('.test_span');
 
-    const game = new Game(5,statsElements,storedProfileInfo); // Initialize with 60 seconds
+    const game = new Game(60,statsElements,storedProfileInfo); // Initialize with 60 seconds
    
 
 
