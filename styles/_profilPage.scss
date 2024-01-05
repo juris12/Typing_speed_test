@@ -1,0 +1,104 @@
+@import "colors";
+.profil_page_outer{
+    display: grid;
+    grid-template-areas: 
+        "info stats"
+        "last_tests stats"    
+    ;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: calc(40vh - 20px) 50vh;
+    gap: 20px 20px;
+    width: 95%;
+    max-width: 1250px;
+    margin: 5vh auto;
+    border-radius: 10px;
+}
+
+#profil_page_main_info,
+#profil_page_last_tests, 
+#profil_page_stats
+{
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+}
+#profil_page_main_info{
+    position: relative;
+    grid-area: info;
+    div{
+        position: absolute;
+        bottom: 20px;
+        display: flex;
+        width: 100%;
+    }
+}
+#profil_page_last_tests{
+    grid-area: last_tests;
+    div {
+        display: flex;
+        align-items: center;
+        h3 {
+            margin: 0;
+        }
+        #select_stats {
+            margin-left: 20px;
+            font-size: 14px;
+            color: #333;
+            height: 2rem;
+            background-color: #fff;
+            border: 1px solid #2f2f2f;
+            border-width: 0px 0px 2px 0px;
+            option {
+                background-color: #fff;
+                color: #333;
+                padding: 8px;
+            }
+        }
+    }
+}
+
+#profil_page_stats{
+    grid-area: stats;
+    overflow: auto;
+    h2{
+        margin-top: 0;
+    }
+    table {
+        border-collapse: collapse;
+        border-spacing: 0;
+        width: 100%;
+    }
+    
+    th, td {
+    text-align: left;
+    padding: 10px;
+    }
+    
+    tr:nth-child(even) {
+    background-color: #f2f2f2;
+    }
+}
+#new_test_btn, #log_out_btn{
+    background-color: $primary_color;
+    border-radius: 20px;
+    color: #fff;
+    padding: 10px 25px;
+    font-weight: bold;
+    margin-right: 10%;
+}
+
+
+
+@media screen and (max-width: 1200px) {
+    .profil_page_outer{
+        grid-template-areas: 
+            "info"
+            "last_tests"
+            "stats"   
+        ;
+        grid-template-columns: 95%;
+        grid-template-rows: calc(40vh - 20px) 50vh;
+        gap: 20px 20px;
+    }
+  }
+  

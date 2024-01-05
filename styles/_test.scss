@@ -1,0 +1,118 @@
+@import "colors";
+.test_outer{
+    height: 90vh;
+    margin: 5vh auto;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    max-width: 1000px;
+    padding: 0 30px;
+    #curent_word{
+        margin-top: 5vh;
+        text-align: center;
+        border: black solid 3px;
+        border-width: 0px 0px 4px 0px;
+        width: fit-content;
+        font-size: 3rem;
+        &:focus {
+            border-width: 0px 0px 4px 0px;
+            outline: none;
+        }       
+    }
+    #test_typing{
+        position: relative;
+        display: flex;
+        height: 30vh;
+        margin: 2vh 0px 2vh 0px;
+        padding: 20px;
+        border: $primary_color solid 2px;
+        border-radius: 5px;
+        flex-wrap: wrap;
+        overflow: hidden;
+        #test_span_curent{
+            background-color: rgb(2, 128, 2,0.1);
+            border-radius: 3px;
+            position: relative;
+            &::before {
+                content: "";
+                position: absolute;
+                bottom: -20px;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 0;
+                height: 0;
+                border-left: 10px solid transparent;
+                border-right: 10px solid transparent;
+                border-bottom: 20px solid $primary_color;
+            }
+        }
+        .test_span{
+            margin-right: 10px;
+            font-size: 2rem;
+            line-height: 3rem;
+        }
+
+        &::after{
+            content: "";
+            height: 80px;
+            width: 100%;
+            position: absolute;
+            bottom: 0px;
+            left: 0px;
+            box-shadow: 0px -60px 40px -20px rgb(255, 255, 255) inset;
+        }
+    }
+}
+.test_span_old{
+    color: $primary_color;
+}
+.test_span_error{
+    opacity: 0.8;
+    color: red;
+}
+.test_statistic{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 7vh;
+    h2{
+        width: 100%;
+        padding: 20px;
+        margin-bottom: 5%;
+        border: 3px solid rgb(0, 0, 0);
+        border-width: 0px 0px 3px 0px;
+    }
+    ul{
+        display: flex;
+        justify-content: start;
+        li{
+            min-width: 100px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            h4{
+                margin-top: 0px;
+            }
+        }
+    }
+}
+.test_span_whitespace{
+    display: flex;
+    &::after{
+    content: '';
+    width: 1rem;
+    height: 20px;
+    }
+}
+
+.empty_span {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+}

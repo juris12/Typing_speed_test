@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil</title>
+    <link rel="stylesheet" href="/styles//index.min.css">
+    <script type="module" src="scripts/profilPage.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="profil_page_outer">
+        <div id="profil_page_main_info">
+            <h1>Hi, random citizen!</h1>
+            <p>Take more tests to improve your typing speed!</p>
+            <h3>Profile not found</h3>
+            <div>
+                <button id="new_test_btn" class="zoom">New test</button>
+                <button id="log_out_btn" class="zoom">Log out</button>
+            </div> 
+        </div>
+        <div id="profil_page_last_tests">
+            <div>
+                <h3>Statistic</h3>
+                <select id="select_stats">
+                    <option value="speed">Speed</option>
+                    <option value="errors">Errors</option>
+                    <option value="accuracy">Accuracy</option>
+                    <option value="words">words correctly typed</option>
+                </select>
+            </div>
+          <canvas id="test_stats" width="0" height="0"></canvas>
+        </div>
+        <div id="profil_page_stats">
+            <h2>Past tests</h2>
+            <table id="profil_page_stats_table">
+                <tr>
+                  <th>nr.</th>
+                  <th>Words</th>
+                  <th>Speed</th>
+                  <th>Errors</th>
+                  <th>Accuracy</th>
+                  <th>Date</th>
+                </tr>
+              </table>
+            
+        </div>
+    </div>
+</body>
+</html>
