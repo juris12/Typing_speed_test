@@ -1,48 +1,65 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <!-- Include Chart.js streaming plugin -->
-  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-streaming"></script>
+
 </head>
+<style>
+  #test_typing{
+    max-width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  #test_typing span{
+    margin-right: 20px;
+    font-size: 2rem;
+  }
+</style>
 <body>
-  <canvas id="liveChart"></canvas>
+  <div id="test_typing"></div>
 </body>
 <script>
-   const ctx = document.getElementById('liveChart').getContext('2d');
+  const testTyping = document.getElementById('test_typing');
+  let testSpans = document.querySelectorAll('.test_span');
 
-const liveChart = new Chart(ctx, {
-  type: 'line',
-  data: {
-    datasets: [{
-      label: 'Live Score',
-      borderColor: 'rgb(75, 192, 192)',
-      borderWidth: 2,
-      fill: false,
-      data: [] // Empty data to start with
-    }]
-  },
-  options: {
-    scales: {
-      x: {
-        type: 'realtime',
-        realtime: {
-          duration: 20000, // Total duration in milliseconds
-          refresh: 1000, // Refresh rate in milliseconds (1 second)
-          delay: 2000, // Delay before displaying new data in milliseconds (2 seconds)
-          onRefresh: function(chart) {
-            // Update the dataset with a random score value
-            const newScore = Math.floor(Math.random() * 100);
-            chart.data.datasets[0].data.push({
-              x: Date.now(),
-              y: newScore
-            });
-          }
-        }
+
+   async function getRandomText() {
+      try {
+        const response = await fetch('https://baconipsum.com/api/?type=meat-and-filler');
+        const data = await response.json();
+        return data.join(' ');
+      } catch (error) {
+        console.error('Error fetching random text:', error);
+        return ''
       }
     }
-  },
-  plugins: [ChartStreamingPlugin] // Include the chartjs-plugin-streaming
-});
+  const add_text = async (testTyping) => {
+      let text = ''
+      const data = await getRandomText()
+      data.split(' ').forEach(word => {
+          const spanElement = document.createElement('span');
+          spanElement.className = 'test_span';
+          spanElement.textContent = word;
+          spanElement.id = '';
+          
+          testTyping.appendChild(spanElement);
+      });
+      // game.text = [...game.text,...text.split(' ')]
+
+      return document.querySelectorAll('.test_span');
+  }
+  document.addEventListener("DOMContentLoaded", async function() {
+
+    let currentIndex = 0;
+    const set_curent_span = async (i) => {
+        testSpans = await add_text(testTyping);
+        console.log('ffd ' + testSpans.length)
+        testSpans.forEach(leater => {
+            leater.id = ''
+        })
+        
+        testSpans[i].id = 'test_span_curent';
+    }
+    set_curent_span(currentIndex)
+  })
 </script>
 </html>
