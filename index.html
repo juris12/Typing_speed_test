@@ -3,14 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="index.css">
-    <title>Typeing speed test app</title>
+    <title>Profil</title>
+    <link rel="stylesheet" href="/styles//index.min.css">
+    <script type="module" src="scripts/profil.js"></script>
 </head>
 <body>
-    <nav>
-        <button>New test</button>
-        <button>Statistic</button>
-        <button>Previos tests</button>
-    </nav>
+    <div class="profil_outer">
+        <div id="profil_iner_left">
+            <h1>Choose your profile</h1>
+            <p>Choose one of locally saved profiles or create a new one</p>
+            <ul id="profil_list">
+            </ul>
+            <button class="add_profil_button zoom">Add new profile</button>
+        </div>
+        <div id="profil_iner_right">
+            <h1>Add new profile</h1>
+            <p>Chose name and add it to locally saved profiles</p>
+            <form>
+                <label for="newProfileName">Name</label>
+                <input type="text" name="newProfileName" id="newProfileName" placeholder="New name"></input>
+                <button type="submit" class="add_profil_button zoom">Add new profile</button>
+            </form>
+            <button class="go_back_profil_button zoom">go back</button>
+            
+        </div>
+    </div>
 </body>
 </html>

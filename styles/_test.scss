@@ -1,3 +1,4 @@
+@import "colors";
 .test_outer{
     height: 90vh;
     margin: 5vh auto;
@@ -28,7 +29,7 @@
         height: 30vh;
         margin: 2vh 0px 2vh 0px;
         padding: 20px;
-        border: green solid 2px;
+        border: $primary_color solid 2px;
         border-radius: 5px;
         flex-wrap: wrap;
         overflow: hidden;
@@ -46,7 +47,7 @@
                 height: 0;
                 border-left: 10px solid transparent;
                 border-right: 10px solid transparent;
-                border-bottom: 20px solid #08942d;
+                border-bottom: 20px solid $primary_color;
             }
         }
         .test_span{
@@ -67,7 +68,7 @@
     }
 }
 .test_span_old{
-    color: green;
+    color: $primary_color;
 }
 .test_span_error{
     opacity: 0.8;

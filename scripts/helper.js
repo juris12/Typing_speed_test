@@ -15,14 +15,15 @@ export default class StoredProfiles {
         if (curentProfilIndex !== -1) {
             const resultsToBeSaved = {
                 speed: results.speed,
-                errors: results.error,
-                signs: results.signs,
+                errors: results.errors,
                 date: results.date,
-                errorRate: results.errorRate
+                words: results.words,
+                accuracy: (results.words/results.allWords*100).toFixed(2)
             }
             this.curentProfile.tests.push(resultsToBeSaved)
             this.curentProfile.score = this.curentProfile.tests.reduce((sum,val) => sum += parseFloat(val.speed),0)/this.curentProfile.tests.length
             this.data[curentProfilIndex].tests.push(resultsToBeSaved)
+            this.data[curentProfilIndex].score = resultsToBeSaved.speed
             localStorage.setItem(`${this.storedObjName}Curent`,JSON.stringify(this.curentProfile))
             localStorage.setItem(this.storedObjName,JSON.stringify(this.data))
         }else{
@@ -33,7 +34,6 @@ export default class StoredProfiles {
         const curentProfil = this.data.find(prof => prof.name === name)
         if (curentProfil != undefined) {
             this.curentProfile = curentProfil
-            console.log('dsgdgdg')
             localStorage.setItem(`${this.storedObjName}Curent`,JSON.stringify(curentProfil))
             return true
         } else {
